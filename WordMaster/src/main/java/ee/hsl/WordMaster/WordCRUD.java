@@ -1,12 +1,18 @@
 package ee.hsl.WordMaster;
 
-import java.lang.reflect.Array;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class WordCRUD implements ICRUD{
     ArrayList<Word> list;
     Scanner crudS = new Scanner(System.in);
+
+    final String FILENAME = "Dictionary.txt";
 
     WordCRUD(Scanner input) {
         list = new ArrayList<>();
@@ -71,6 +77,19 @@ public class WordCRUD implements ICRUD{
         return indexList;
     }
 
+    public void listAll(int level) {
+        int count = 0;
+        System.out.println("--------------------------------------------------");
+        for(int i = 0; i < list.size(); i++) {
+            int iLevel = list.get(i).getLevel();
+            if(level != iLevel) continue;
+            System.out.print((count + 1) + " ");
+            System.out.println(list.get(i).toString());
+            count++;
+        }
+        System.out.println("--------------------------------------------------");
+    }
+
     public void updateWord() {
         System.out.print("=> 수정할 단어 검색 : ");
         String keyword = crudS.next();
@@ -100,5 +119,57 @@ public class WordCRUD implements ICRUD{
         } else {
             System.out.println("취소되었습니다.");
         }
+    }
+
+    public void loadFile() {
+        int count = 0;
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(FILENAME));
+
+            while(true) {
+                String line = br.readLine();
+                if(line == null) break;
+                String data[] = line.split("\\|");
+
+                int level = Integer.parseInt(data[0]);
+                String word = data[1];
+                String meaning = data[2];
+
+                list.add(new Word(0, level, word, meaning));
+                count++;
+            }
+            System.out.println("=> " + count + "개 로딩 완료!");
+            br.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void saveFile() {
+        try {
+            PrintWriter pw = new PrintWriter(new FileWriter(FILENAME));
+
+            for(Word one : list) {
+                pw.write(one.toFileString() + "\n");
+            }
+
+            System.out.println("=> 저장 완료!");
+
+            pw.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void searchLevel() {
+        System.out.print("=> 검색할 난이도 입력 : ");
+        int level = crudS.nextInt();
+        listAll(level);
+    }
+
+    public void searchWord() {
+        System.out.print("=> 검색할 단어 입력 : ");
+        String keyword = crudS.next();
+        listAll(keyword);
     }
 }

@@ -6,6 +6,7 @@ public class WordManager {
     WordCRUD wordCRUD;
     Scanner managerS = new Scanner(System.in);
     public void start() {
+        wordCRUD.loadFile();
         while(true) {
             int menu = selectMenu();
 
@@ -16,6 +17,12 @@ public class WordManager {
                 case 1:
                     wordCRUD.listAll();
                     break;
+                case 2:
+                    wordCRUD.searchLevel();
+                    break;
+                case 3:
+                    wordCRUD.searchWord();
+                    break;
                 case 4:
                     wordCRUD.addWord();
                     break;
@@ -24,6 +31,9 @@ public class WordManager {
                     break;
                 case 6:
                     wordCRUD.deleteWord();
+                    break;
+                case 7:
+                    wordCRUD.saveFile();
                     break;
                 default:
                     System.out.println("잘못된 입력입니다.");
