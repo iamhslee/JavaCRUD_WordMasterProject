@@ -19,6 +19,12 @@ public class WordManager {
                 case 4:
                     wordCRUD.addWord();
                     break;
+                case 5:
+                    wordCRUD.updateWord();
+                    break;
+                case 6:
+                    wordCRUD.deleteWord();
+                    break;
                 default:
                     System.out.println("잘못된 입력입니다.");
             }

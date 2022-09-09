@@ -1,5 +1,6 @@
 package ee.hsl.WordMaster;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -51,5 +52,53 @@ public class WordCRUD implements ICRUD{
             System.out.println(list.get(i).toString());
         }
         System.out.println("--------------------------------------------------");
+    }
+
+    public ArrayList<Integer> listAll(String keyword) {
+        ArrayList<Integer> indexList = new ArrayList<>();
+        int count = 0;
+        System.out.println("--------------------------------------------------");
+        for(int i = 0; i < list.size(); i++) {
+            String word = list.get(i).getWord();
+            if(!word.contains(keyword)) continue;
+            System.out.print((count + 1) + " ");
+            System.out.println(list.get(i).toString());
+            indexList.add(i);
+            count++;
+        }
+        System.out.println("--------------------------------------------------");
+
+        return indexList;
+    }
+
+    public void updateWord() {
+        System.out.print("=> 수정할 단어 검색 : ");
+        String keyword = crudS.next();
+        ArrayList<Integer> indexList = this.listAll(keyword);
+        System.out.print("=> 수정할 번호 선택 : ");
+        int indexNumber = crudS.nextInt();
+        crudS.nextLine();
+        System.out.print("=> 뜻 입력 : ");
+        String meaning = crudS.nextLine();
+        Word word = list.get(indexList.get(indexNumber - 1));
+        word.setMeaning(meaning);
+        System.out.println("단어가 수정되었습니다.");
+    }
+
+    public void deleteWord() {
+        System.out.print("=> 삭제할 단어 검색 : ");
+        String keyword = crudS.next();
+        ArrayList<Integer> indexList = this.listAll(keyword);
+        System.out.print("=> 삭제할 번호 선택 : ");
+        int indexNumber = crudS.nextInt();
+        crudS.nextLine();
+        System.out.print("=> 정말로 삭제하실래요 (Y/N) : ");
+        String choice = crudS.nextLine();
+        if(choice.equalsIgnoreCase("Y")) {
+            list.remove((int)indexList.get(indexNumber - 1));
+            System.out.println("단어가 삭제되었습니다.");
+        } else {
+            System.out.println("취소되었습니다.");
+        }
     }
 }
