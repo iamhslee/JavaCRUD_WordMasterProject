@@ -56,3 +56,34 @@
 `CRUD 프로그램의 메인 화면 (메뉴 리스트) 구성요소는 따로 .txt의 형태로 공유해 주시면 좋겠습니다. PDF의 경우, 메뉴 구성을 복사하는데에 불편함이 있습니다!`
 
 ---
+
+### Step2. Update & Delete & File IO
+
+#### 구현 내용 체크리스트
+
+* 수준별 단어 보기 기능
+    * ✅ **정상 작동**
+    * 실행 화면:
+![](screenshots/5.png)
+* 단어 검색 기능
+    * ✅ **정상 작동**
+    * 실행 화면:
+![](screenshots/6.png)
+* 단어 수정 기능
+    * ✅ **정상 작동**
+    * 실행 화면:
+![](screenshots/7.png)
+* 단어 삭제 기능
+    * ✅ **정상 작동**
+    * 실행 화면:
+![](screenshots/8.png)
+* 파일 저장 및 불러오기 기능
+    * ✅ **정상 작동**
+    * 실행 화면:
+![](screenshots/9.png)
+![](screenshots/10.png)
+![](screenshots/12.png)
+    * 파일 내용:
+![](screenshots/11.png)
+
+---

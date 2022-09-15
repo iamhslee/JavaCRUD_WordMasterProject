@@ -2,6 +2,5 @@
 1| banana|바나나
 1| computer|컴퓨터
 1| transfer|옮기다
-2| scatter|산산조각
+2| scatter|흩뿌리다
 3| controversial|논란의
-1| pineapple|파인애플
